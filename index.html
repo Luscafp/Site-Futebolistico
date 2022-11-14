@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" />
+    <title>Ligas Futebolisticas</title>
+</head>
+
+<header>
+    <div class="header id="header">
+
+        <div class="logos" id="logo">
+            <img src="logo-bola.png"/>
+        </div>
+        
+    </div>
+</header>
+
+
+<body>
+
+    <div id="app">
+        <button @click="catchLeague">Liga</button>
+
+            <div class="container">
+
+                <div class="card" v-for="league in league">
+
+                    <img :src= "league.logos.light" />
+                    <h4>{{league.name}}</h4>
+
+                    <div class="card-abbr">    
+
+                        <h5>{{league.abbr}}</h5>
+
+                    </div>
+
+                </div>
+
+            </div>   
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                league:{}
+            },
+
+            methods:{
+                catchLeague() {
+                    console.log("Ta indo")
+                    fetch("https://api-football-standings.azharimm.dev/leagues")
+                    .then (r => r.json()) 
+                    .then (r => {
+                        console.log(r)
+                        this.league = r.data
+                    })
+
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>
