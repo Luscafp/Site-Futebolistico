@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="./app.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <title>Ligas Futebolisticas</title>
 </head>
 
@@ -12,7 +15,7 @@
     <div class="header id="header">
 
         <div class="logos" id="logo">
-            <img src="logo-bola.png"/>
+            <img src="./assets/logo-bola.png" alt="logo bola"/>
         </div>
         
     </div>
@@ -23,27 +26,21 @@
 
     <div id="app">
         <button @click="catchLeague">Liga</button>
-
             <div class="container">
-
                 <div class="card" v-for="league in league">
-
-                    <img :src= "league.logos.light" />
-                    <h4>{{league.name}}</h4>
-
-                    <div class="card-abbr">    
-
-                        <h5>{{league.abbr}}</h5>
-
+                    
+                    <div class="league-logos">                
+                        <img :src= "league.logos.light" :alt="league.id" />
+                    </div>
+                    
+                    <div class="card-league" id="league name">
+                        <h3>{{league.name}}</h3>    
+                        <h4>{{league.abbr}}</h4>
                     </div>
 
                 </div>
-
             </div>   
     </div>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 
     <script>
         var app = new Vue({
@@ -51,7 +48,7 @@
             data: {
                 league:{}
             },
-
+    
             methods:{
                 catchLeague() {
                     console.log("Ta indo")
@@ -61,11 +58,10 @@
                         console.log(r)
                         this.league = r.data
                     })
-
                 }
             }
-
         })
     </script>
 </body>
+
 </html>
