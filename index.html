@@ -4,31 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="style.css" rel="stylesheet" />
+    <link href="./style/style.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-    <script src="./app.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <title>Ligas Futebolisticas</title>
 </head>
 
 <header>
+    <!-- Header -->
     <div class="header id="header">
-
         <div class="logos" id="logo">
             <img src="./assets/logo-bola.png" alt="logo bola"/>
-        </div>
-        
+        </div>  
     </div>
-</header>
+</header> 
 
 
 <body>
 
     <div id="app">
-        <button @click="catchLeague">Liga</button>
+        <!-- Botões para chamar função fetch -->
+        <button @click.prevent.once ="fetchLeague"> Liga </button>
+        <button @click.prevent.once="fetchStandings"> Classificação </button>
+
+            <!-- Fetch das ligas e seus nomes -->
             <div class="container">
-                <div class="card" v-for="league in league">
-                    
+                <div class="card" v-for="league in league">             
                     <div class="league-logos">                
                         <img :src= "league.logos.light" :alt="league.id" />
                     </div>
@@ -37,31 +38,35 @@
                         <h3>{{league.name}}</h3>    
                         <h4>{{league.abbr}}</h4>
                     </div>
-
                 </div>
             </div>   
+            
+            <!-- Fetch das classificações -->
+            <div class="card" v-if="standings">
+                <h1 align="center">{{standings.name}}</h1>
+                <h3 align="center">{{standings.season}}</h3>
+
+                <!-- For para receber dados da classificação -->
+                <div class="card" v-for="stand in standings.standings" :key="stand.team.id">
+                    <h1> 
+                        <img :src="stand.team.logos[0].href" height="50px" width="50px" style="margin-top: 20px"/> 
+                        {{stand.team.abbreviation}}
+                    </h1>
+                    <div class="display">
+                        <div style="margin-top: 20px;" v-for="stat in stand?.stats">
+                            <div class="display">
+                                <p> {{ stat.displayName }} </p>
+                            </div>
+                            <p> {{ stat.displayValue }} </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
 
-    <script>
-        var app = new Vue({
-            el: "#app",
-            data: {
-                league:{}
-            },
     
-            methods:{
-                catchLeague() {
-                    console.log("Ta indo")
-                    fetch("https://api-football-standings.azharimm.dev/leagues")
-                    .then (r => r.json()) 
-                    .then (r => {
-                        console.log(r)
-                        this.league = r.data
-                    })
-                }
-            }
-        })
-    </script>
+    <script src="./scripts/script.js"></script>
+    
 </body>
 
 </html>

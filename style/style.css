@@ -30,8 +30,6 @@
     width: 75px;
   }
 
-/*BODY CONTENT*/
-
   .container {
     display: flex;
     flex-wrap: wrap;
@@ -44,7 +42,6 @@
     text-align: center;
     font-family: 'Lato', sans-serif;
     box-shadow: 0 0 3rem rgba(0,0,0,.1);
-
   }
 
   .card-league {
@@ -55,6 +52,17 @@
     text-align: center;
     padding-bottom: 1px;
     box-shadow: 0 0 3rem rgba(0,0,0,.1);
+  }
+
+  .display {
+    display: flex;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap:20px;
+    width: 100%;
+    justify-content: space-around;
+    padding: 0 10px;
   }
 
   .img{
